@@ -1,2 +1,2 @@
 # OnboardingVisualization
-Visualization tool for measuring onboarding effectiveness on open source projects
+Visualization tool for measuring onboarding effectiveness on open source projects.
