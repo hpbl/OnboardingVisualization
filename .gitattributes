@@ -1,0 +1,4 @@
+# auto-detect text files, ensure they use LF.
+*.jsx text eol=lf
+*.css text eol=lf
+*.js  text eol=lf
