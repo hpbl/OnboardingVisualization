@@ -41,7 +41,7 @@ jobs:
               git rm -rf .
               cd ..
 
-              cp -a ../master gh-pages
+              cp -a ../master/ gh-pages
 
               # mkdir -p gh-pages/.circleci && cp -a master/.circleci/. gh-pages/.circleci/.
               cd gh-pages
