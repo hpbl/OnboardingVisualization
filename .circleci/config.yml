@@ -27,27 +27,31 @@ jobs:
           command: |
             if [ $CIRCLE_BRANCH == $SOURCE_BRANCH ]; then
 
-
+              # creating directory to hold the new release files
               mkdir ../master
+
+              # copying all files (including hidden ones) from re repo to new directory
               cp -a . ../master
 
+              # configuring git credentials that are set on CircleCI
               git config --global user.email $GH_EMAIL
               git config --global user.name $GH_NAME
 
+              # cloning the repo again in a new gh-pages directory
               git clone $CIRCLE_REPOSITORY_URL gh-pages
-
               cd gh-pages
+
+              # checking out the TARGET_BRANCH (gh-pages)
               git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
+
+              # removing any files from the old release
               git rm -rf .
-              cd ..
 
-              cp -r ../master/* gh-pages
+              # copying new release files (but not hidden ones) to gh-pages directory
+              cp -r ../../master/* gh-pages
 
-              # mkdir -p gh-pages/.circleci && cp -a master/.circleci/. gh-pages/.circleci/.
-              cd gh-pages
-
+              # committing the release and skipping CI
               git add -A
               git commit -m "Automated deployment to GitHub Pages: ${CIRCLE_SHA1} [ci skip]" --allow-empty
-
               git push --force --quiet origin $TARGET_BRANCH
             fi
