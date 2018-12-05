@@ -19,6 +19,7 @@ jobs:
 
       - deploy:
           name: Deploy
+          github-token: $GH_TOKEN
           command: |
             if [ $CIRCLE_BRANCH == $SOURCE_BRANCH ]; then
 
