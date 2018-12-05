@@ -1,0 +1,30 @@
+{
+  "name": "onboardingvisualization",
+  "version": "1.0.0",
+  "description": "Tool to visualize stats of open-source repositories",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ./src --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hpbl/OnboardingVisualization.git"
+  },
+  "keywords": [
+    "open-source",
+    "onboarding",
+    "visualization"
+  ],
+  "author": "Porteiros",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hpbl/OnboardingVisualization/issues"
+  },
+  "homepage": "https://hpbl.github.io/OnboardingVisualization/",
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}
