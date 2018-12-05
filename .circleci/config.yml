@@ -47,8 +47,8 @@ jobs:
               # removing any files from the old release
               git rm -rf .
 
-              # copying new release files (but not hidden ones) to gh-pages directory
-              cp -r ../../master/* gh-pages
+              # copying new release files (but not hidden ones) to current (gh-pages) directory
+              cp -r ../../master/* .
 
               # committing the release and skipping CI
               git add -A
