@@ -15,11 +15,15 @@ jobs:
       - TARGET_BRANCH: gh-pages
 
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "3e:c6:a7:77:eb:87:bc:95:77:fd:64:94:19:f7:da:23"
+
       - checkout
 
       - deploy:
           name: Deploy
-          github-token: $GH_TOKEN
+
           command: |
             if [ $CIRCLE_BRANCH == $SOURCE_BRANCH ]; then
 
