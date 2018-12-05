@@ -6,7 +6,7 @@ jobs:
         - master
 
     docker:
-      - image: debian:stretch # circleci/node:8
+      - image: circleci/node:8
 
     working_directory: ~/repo
 
