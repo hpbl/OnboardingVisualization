@@ -21,20 +21,24 @@ jobs:
           name: Deploy
           command: |
             if [ $CIRCLE_BRANCH == $SOURCE_BRANCH ]; then
+
+              mkdir master
+              cp -a . master
+
               git config --global user.email $GH_EMAIL
               git config --global user.name $GH_NAME
 
-              git clone $CIRCLE_REPOSITORY_URL out
+              git clone $CIRCLE_REPOSITORY_URL gh-pages
 
-              cd out
+              cd gh-pages
               git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
               git rm -rf .
               cd ..
 
-              cp -r !(out/) /out
+              cp -a ../master /gh-pages
 
-              mkdir -p out/.circleci && cp -a .circleci/. out/.circleci/.
-              cd out
+              # mkdir -p gh-pages/.circleci && cp -a master/.circleci/. gh-pages/.circleci/.
+              cd gh-pages
 
               git add -A
               git commit -m "Automated deployment to GitHub Pages: ${CIRCLE_SHA1}" --allow-empty
