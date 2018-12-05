@@ -23,7 +23,7 @@ jobs:
             if [ $CIRCLE_BRANCH == $SOURCE_BRANCH ]; then
 
               mkdir master
-              cp -a . master
+              mv -v ./*  master/
 
               git config --global user.email $GH_EMAIL
               git config --global user.name $GH_NAME
@@ -35,7 +35,7 @@ jobs:
               git rm -rf .
               cd ..
 
-              cp -a ../master /gh-pages
+              cp -a master gh-pages
 
               # mkdir -p gh-pages/.circleci && cp -a master/.circleci/. gh-pages/.circleci/.
               cd gh-pages
