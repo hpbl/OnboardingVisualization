@@ -67,6 +67,7 @@ jobs:
 
               # copying new release files (but not hidden ones) to current (gh-pages) directory
               cp -r ../../master/* .
+              rm -rf node_modules
 
               # committing the release and skipping CI
               git add -A
