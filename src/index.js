@@ -2,7 +2,7 @@
 const d3 = require('d3');
 
 // Log the parts object to our browser's console
-d3.select('body').style('background-color', 'red');
+d3.select('body').style('background-color', 'cyan');
 
 console.log(d3.version);
 console.log('testando');
