@@ -12,9 +12,10 @@ console.log(d3.version);
 console.log('testando');
 
 changeH1Color();
+
 numberPrsNewContributorsAccepted(
   'CMU-Perceptual-Computing-Lab',
   'openpose',
-  540,
-  div => d3.select('body').append(div),
+  500,
+  chart => chart,
 );

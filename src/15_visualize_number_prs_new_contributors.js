@@ -23,23 +23,16 @@ async function getPrs(user, repo) {
 }
 
 function numberPrsNewContributorsAcceptedDonutChart(
-  prsNewContributorsCount, acceptedPrsNewContributorsCount,
-  size,
+  notAcceptedPrs, acceptedPrs, size,
 ) {
-  const notAcceptedPrs = prsNewContributorsCount - acceptedPrsNewContributorsCount;
-  const acceptedPrs = acceptedPrsNewContributorsCount;
-
   const data = [
-    {
-      name: 'Not accepted PRs', count: notAcceptedPrs, color: '#e90052',
-    },
     {
       name: 'Accepted PRs', count: acceptedPrs, color: '#00ff85',
     },
+    {
+      name: 'Not accepted PRs', count: notAcceptedPrs, color: '#e90052',
+    },
   ];
-
-  console.log(`notAcceptedPrs: ${notAcceptedPrs}`);
-  console.log(`acceptedPrs: ${acceptedPrs}`);
 
   const width = size;
   const height = size;
@@ -47,15 +40,20 @@ function numberPrsNewContributorsAcceptedDonutChart(
   const radius = 4 * size / 10;
   const innerRadius = size / 10;
 
+  const numberTextSize = size / 10;
+  const nameTextSize = size / 40;
+
   const arc = d3.arc()
-    .outerRadius(radius - 10)
+    .outerRadius(radius)
     .innerRadius(innerRadius);
 
   const pie = d3.pie()
     .sort(null)
     .value(d => d.count);
 
-  const svg = d3.select('body').append('svg')
+  const svg = d3.select('body')
+    .append('div')
+    .append('svg')
     .attr('width', width)
     .attr('height', height)
     .append('g')
@@ -63,18 +61,45 @@ function numberPrsNewContributorsAcceptedDonutChart(
 
   const g = svg.selectAll('.arc')
     .data(pie(data))
-    .enter().append('g');
+    .enter()
+    .append('g');
 
   g.append('path')
     .attr('d', arc)
     .style('fill', d => d.data.color);
+
+  const gTexts = svg.selectAll('.arc2')
+    .data(pie(data))
+    .enter()
+    .append('g')
+    .attr('class', 'arc');
+
+  gTexts.append('text')
+    .attr('transform', d => `translate(${arc.centroid(d)})`)
+    .attr('dy', `.${numberTextSize}em`)
+    .style('text-anchor', 'middle')
+    .style('font-size', `${numberTextSize}px`)
+    .attr('font-family', 'consolas')
+    .text(d => d.data.count);
+
+  gTexts.append('text')
+    .attr('transform', (d) => {
+      const dAux = arc.centroid(d);
+      dAux[1] += numberTextSize;
+      return `translate(${dAux})`;
+    })
+    .attr('dy', `.${numberTextSize}em`)
+    .style('text-anchor', 'middle')
+    .style('font-size', `${nameTextSize}px`)
+    .attr('font-family', 'consolas')
+    .text(d => d.data.name);
 
   return svg;
 }
 
 async function numberPrsNewContributorsAccepted(user, repo, size, callback) {
   const prs = await getPrs(user, repo);
-  console.log(prs);
+  // console.log(prs);
 
   // get first PR of each user in the repo:
   const firstPrs = {};
@@ -98,16 +123,17 @@ async function numberPrsNewContributorsAccepted(user, repo, size, callback) {
   }
   const acceptedPrsNewContributorsCount = acceptedFirstPrs.length;
 
-  console.log(`prsNewContributorsCount: ${prsNewContributorsCount}`);
-  console.log(`acceptedPrsNewContributorsCount: ${acceptedPrsNewContributorsCount}`);
+  const notAcceptedPrs = prsNewContributorsCount - acceptedPrsNewContributorsCount;
+  const acceptedPrs = acceptedPrsNewContributorsCount;
+
+  // console.log(`notAcceptedPrs: ${notAcceptedPrs}`);
+  // console.log(`acceptedPrs: ${acceptedPrs}`);
 
   const donutChart = numberPrsNewContributorsAcceptedDonutChart(
-    prsNewContributorsCount, acceptedPrsNewContributorsCount,
-    size,
+    notAcceptedPrs, acceptedPrs, size,
   );
 
-  const div = d3.select('body').append('div').append(donutChart);
-  callback(div);
+  callback(donutChart);
 }
 
 export default numberPrsNewContributorsAccepted;
