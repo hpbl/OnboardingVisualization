@@ -4,6 +4,7 @@
   "description": "Tool to visualize stats of open-source repositories",
   "main": "index.js",
   "scripts": {
+    "start": "beefy src/index.js --live",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./src --fix"
   },
@@ -23,6 +24,7 @@
   },
   "homepage": "https://hpbl.github.io/OnboardingVisualization/",
   "devDependencies": {
+    "beefy": "^2.1.8",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
@@ -35,6 +37,12 @@
     }
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "git add"]
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "d3": "^5.7.0"
   }
 }
