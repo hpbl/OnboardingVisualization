@@ -42,8 +42,10 @@
     ]
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "d3": "^5.7.0",
     "parcel-bundler": "^1.10.3",
-    "test": "^0.6.0"
+    "test": "^0.6.0",
+    "transform-runtime": "0.0.0"
   }
 }

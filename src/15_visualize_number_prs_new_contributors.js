@@ -1,5 +1,9 @@
 /* eslint-disable no-await-in-loop */
 
+// Use a Node.js core library
+import * as d3 from 'd3';
+import 'babel-polyfill';
+
 const token = '43aae801c5a8102a0468a7ce5398fac958611e6c';
 
 async function getPrs(user, repo) {
@@ -19,7 +23,70 @@ async function getPrs(user, repo) {
   return prsList;
 }
 
+function numberPrsNewContributorsAcceptedDonutChart(
+  prsNewContributorsCount, acceptedPrsNewContributorsCount,
+) {
+  // data = [
+  //   {name: 'prsNewContributorsCount', value: prsNewContributorsCount},
+  //   {name: 'acceptedPrsNewContributorsCount', value: acceptedPrsNewContributorsCount}
+  // ]
+
+  const data = [
+    {
+      name: 'cats', count: prsNewContributorsCount, percentage: 2, color: '#000000',
+    },
+    {
+      name: 'dogs', count: acceptedPrsNewContributorsCount, percentage: 8, color: '#f8b70a',
+    },
+  ];
+
+  const width = 540;
+  const height = 540;
+  const radius = 200;
+
+  const arc = d3.arc()
+    .outerRadius(radius - 10)
+    .innerRadius(100);
+
+  const pie = d3.pie()
+    .sort(null)
+    .value(d => d.count);
+
+  const svg = d3.select('body').append('svg')
+    .attr('width', width)
+    .attr('height', height)
+    .append('g')
+    .attr('transform', `translate(${width / 2},${height / 2})`);
+
+  const g = svg.selectAll('.arc')
+    .data(pie(data))
+    .enter().append('g');
+
+  g.append('path')
+    .attr('d', arc)
+    .style('fill', d => d.data.color);
+
+  g.append('text')
+    .attr('transform', (d) => {
+      const dAux = arc.centroid(d);
+      dAux[0] *= 1.5; // multiply by a constant factor
+      dAux[1] *= 1.5; // multiply by a constant factor
+      return `translate(${dAux})`;
+    })
+    .attr('dy', '.50em')
+    .style('text-anchor', 'middle')
+    .text((d) => {
+      if (d.data.percentage < 8) {
+        return '';
+      }
+      return `${d.data.percentage}%`;
+    });
+
+  return svg;
+}
+
 async function numberPrsNewContributorsAccepted(user, repo, callback) {
+  console.log('eae');
   const prs = await getPrs(user, repo);
   console.log(prs);
 
@@ -48,9 +115,12 @@ async function numberPrsNewContributorsAccepted(user, repo, callback) {
   console.log(`prsNewContributorsCount: ${prsNewContributorsCount}`);
   console.log(`acceptedPrsNewContributorsCount: ${acceptedPrsNewContributorsCount}`);
 
-  const div = '<div> visualization </div>';
+  const donutChart = numberPrsNewContributorsAcceptedDonutChart(
+    prsNewContributorsCount, acceptedPrsNewContributorsCount,
+  );
+
+  const div = d3.select('body').append('div').append(donutChart);
   callback(div);
 }
 
-// numberPrsNewContributorsAccepted('ambujraj', 'hacktoberfest2018', div => div);
-numberPrsNewContributorsAccepted('CMU-Perceptual-Computing-Lab', 'openpose', div => div);
+export default numberPrsNewContributorsAccepted;
