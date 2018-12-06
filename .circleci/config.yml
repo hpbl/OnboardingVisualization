@@ -42,8 +42,8 @@ jobs:
           command: |
             if [ $CIRCLE_BRANCH == $SOURCE_BRANCH ]; then
 
-              mkdir build
-              npm build
+              # running build script that generates build directory
+              npm run build
 
               # creating directory to hold the new release files
               mkdir ../master
@@ -65,9 +65,8 @@ jobs:
               # removing any files from the old release
               git rm -rf .
 
-              # copying new release files (but not hidden ones) to current (gh-pages) directory
-              cp -r ../../master/* .
-              rm -rf node_modules
+              # copying new release files to current (gh-pages) directory
+              cp -r ../../master/build/* .
 
               # committing the release and skipping CI
               git add -A

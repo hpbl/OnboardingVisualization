@@ -4,10 +4,10 @@
   "description": "Tool to visualize stats of open-source repositories",
   "main": "index.js",
   "scripts": {
-    "start": "beefy src/* --live",
+    "start": "parcel index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./src --fix",
-    "build": "browserify src/* > build/bundle.js"
+    "build": "parcel build index.html --out-dir build"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,6 @@
   },
   "homepage": "https://hpbl.github.io/OnboardingVisualization/",
   "devDependencies": {
-    "beefy": "^2.1.8",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
@@ -44,7 +43,8 @@
     ]
   },
   "dependencies": {
-    "browserify": "^16.2.3",
-    "d3": "^5.7.0"
+    "d3": "^5.7.0",
+    "parcel-bundler": "^1.10.3",
+    "test": "^0.6.0"
   }
 }
