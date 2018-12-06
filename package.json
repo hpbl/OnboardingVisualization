@@ -4,10 +4,8 @@
   "description": "Tool to visualize stats of open-source repositories",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ./src --fix",
-    "build": "parcel build index.html --out-dir build"
+    "lint": "eslint ./src --fix"
   },
   "repository": {
     "type": "git",
@@ -41,10 +39,5 @@
       "eslint --fix",
       "git add"
     ]
-  },
-  "dependencies": {
-    "d3": "^5.7.0",
-    "parcel-bundler": "^1.10.3",
-    "test": "^0.6.0"
   }
 }
