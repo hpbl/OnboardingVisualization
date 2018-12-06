@@ -6,7 +6,8 @@
   "scripts": {
     "start": "beefy src/index.js --live",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ./src --fix"
+    "lint": "eslint ./src --fix",
+    "build" : "browserify src/index.js > build/bundle.js" 
   },
   "repository": {
     "type": "git",
