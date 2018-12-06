@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "d3": "^5.7.0",
-    "parcel-bundler": "^1.10.3"
+    "parcel-bundler": "^1.10.3",
+    "test": "^0.6.0"
   }
 }
