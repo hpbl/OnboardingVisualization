@@ -1,5 +1,6 @@
 // Use a Node.js core library
 import * as d3 from 'd3';
+import 'babel-polyfill';
 
 import changeH1Color from './teste';
 import numberPrsNewContributorsAccepted from './15_visualize_number_prs_new_contributors';
@@ -11,4 +12,9 @@ console.log(d3.version);
 console.log('testando');
 
 changeH1Color();
-numberPrsNewContributorsAccepted('CMU-Perceptual-Computing-Lab', 'openpose', div => d3.select('body').append(div));
+numberPrsNewContributorsAccepted(
+  'CMU-Perceptual-Computing-Lab',
+  'openpose',
+  540,
+  div => d3.select('body').append(div),
+);
