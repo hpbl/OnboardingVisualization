@@ -4,10 +4,10 @@
   "description": "Tool to visualize stats of open-source repositories",
   "main": "index.js",
   "scripts": {
-    "start": "beefy src/index.js --live",
+    "start": "beefy src/* --live",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./src --fix",
-    "build": "browserify src/index.js > build/bundle.js"
+    "build": "browserify src/* > build/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -44,6 +44,7 @@
     ]
   },
   "dependencies": {
+    "browserify": "^16.2.3",
     "d3": "^5.7.0"
   }
 }

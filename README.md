@@ -20,7 +20,12 @@ spotties was built using npm.
 npm install
 ```
 
-4. Open `index.html`
+4. Start the local server:
+```sh
+npm start
+```
+
+4. Open your browser on the specified address (normally http://localhost:9966/)
 
 
 ## Contributing
