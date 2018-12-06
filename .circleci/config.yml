@@ -66,7 +66,7 @@ jobs:
               git rm -rf .
 
               # copying new release files to current (gh-pages) directory
-              cp -r ../../master/build/* .
+              cp -r ../../master/dist/* .
 
               # committing the release and skipping CI
               git add -A
