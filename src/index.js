@@ -17,5 +17,5 @@ numberPrsNewContributorsAccepted(
   'CMU-Perceptual-Computing-Lab',
   'openpose',
   500,
-  chart => chart,
+  svg => svg,
 );

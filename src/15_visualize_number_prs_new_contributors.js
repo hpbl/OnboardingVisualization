@@ -51,9 +51,7 @@ function numberPrsNewContributorsAcceptedDonutChart(
     .sort(null)
     .value(d => d.count);
 
-  const svg = d3.select('body')
-    .append('div')
-    .append('svg')
+  const svg = d3.create('svg')
     .attr('width', width)
     .attr('height', height)
     .append('g')
@@ -93,6 +91,11 @@ function numberPrsNewContributorsAcceptedDonutChart(
     .style('font-size', `${nameTextSize}px`)
     .attr('font-family', 'consolas')
     .text(d => d.data.name);
+
+  d3.select('body')
+    .append('div')
+    .node()
+    .appendChild(svg.node());
 
   return svg;
 }
