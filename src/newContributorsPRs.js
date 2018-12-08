@@ -1,5 +1,5 @@
 /* eslint-disable no-await-in-loop */
-
+import { colors } from './colorPalette';
 import { getPrs } from './dataProvider';
 import { donutChart } from './dataVisualizer';
 
@@ -33,10 +33,10 @@ async function numberPrsNewContributorsAccepted(user, repo, size, divId) {
 
   const data = [
     {
-      name: 'Accepted PRs', count: acceptedPrs, color: '#00ff85',
+      name: 'Accepted PRs', count: acceptedPrs, color: colors.green,
     },
     {
-      name: 'Not accepted PRs', count: notAcceptedPrs, color: '#e90052',
+      name: 'Not accepted PRs', count: notAcceptedPrs, color: colors.pink,
     },
   ];
   donutChart(data, size, divId);
