@@ -14,7 +14,6 @@ async function getPrs(user, repo) {
     const promise = fetchResult.json();
     promiseValue = await promise.then(value => value);
 
-    console.log(`page: ${page}, ${promiseValue.length}`);
     prsList = prsList.concat(promiseValue);
     page += 1;
   }
@@ -120,9 +119,6 @@ async function numberPrsNewContributorsAccepted(user, repo, size, divId) {
 
   const notAcceptedPrs = prsNewContributorsCount - acceptedPrsNewContributorsCount;
   const acceptedPrs = acceptedPrsNewContributorsCount;
-
-  // console.log(`notAcceptedPrs: ${notAcceptedPrs}`);
-  // console.log(`acceptedPrs: ${acceptedPrs}`);
 
   numberPrsNewContributorsAcceptedDonutChart(
     notAcceptedPrs, acceptedPrs, size, divId,
