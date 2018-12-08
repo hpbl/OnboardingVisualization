@@ -18,5 +18,22 @@ export async function getPrs(user, repo) {
   return prsList;
 }
 
+export async function getPrCommentsList(user, repo, prNumber) {
+  const fetchResult = await fetch(`https://api.github.com/repos/${user}/${repo}/pulls/${prNumber}/comments?access_token=${token}`);
+  const promise = fetchResult.json();
+  const promiseValue = await promise.then(value => value);
+  const commentsList = await promiseValue;
 
-export default { getPrs };
+  return commentsList;
+}
+
+export async function getPrReviewsList(user, repo, prNumber) {
+  const fetchResult = await fetch(`https://api.github.com/repos/${user}/${repo}/pulls/${prNumber}/reviews?access_token=${token}`);
+  const promise = fetchResult.json();
+  const promiseValue = await promise.then(value => value);
+  const commentsList = await promiseValue;
+
+  return commentsList;
+}
+
+export default { getPrs, getPrCommentsList, getPrReviewsList };
