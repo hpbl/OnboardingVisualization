@@ -23,7 +23,7 @@ async function getPrs(user, repo) {
 }
 
 function numberPrsNewContributorsAcceptedDonutChart(
-  notAcceptedPrs, acceptedPrs, size,
+  notAcceptedPrs, acceptedPrs, size, divId,
 ) {
   const data = [
     {
@@ -38,7 +38,7 @@ function numberPrsNewContributorsAcceptedDonutChart(
   const height = size;
 
   const radius = 4 * size / 10;
-  const innerRadius = size / 10;
+  const innerRadius = 2 * size / 10;
 
   const numberTextSize = size / 10;
   const nameTextSize = size / 40;
@@ -51,7 +51,9 @@ function numberPrsNewContributorsAcceptedDonutChart(
     .sort(null)
     .value(d => d.count);
 
-  const svg = d3.create('svg')
+  const svg = d3.select('div')
+    .attr('id', divId)
+    .append('svg')
     .attr('width', width)
     .attr('height', height)
     .append('g')
@@ -74,7 +76,6 @@ function numberPrsNewContributorsAcceptedDonutChart(
 
   gTexts.append('text')
     .attr('transform', d => `translate(${arc.centroid(d)})`)
-    .attr('dy', `.${numberTextSize}em`)
     .style('text-anchor', 'middle')
     .style('font-size', `${numberTextSize}px`)
     .attr('font-family', 'consolas')
@@ -83,26 +84,17 @@ function numberPrsNewContributorsAcceptedDonutChart(
   gTexts.append('text')
     .attr('transform', (d) => {
       const dAux = arc.centroid(d);
-      dAux[1] += numberTextSize;
+      dAux[1] += (numberTextSize / 2);
       return `translate(${dAux})`;
     })
-    .attr('dy', `.${numberTextSize}em`)
     .style('text-anchor', 'middle')
     .style('font-size', `${nameTextSize}px`)
     .attr('font-family', 'consolas')
     .text(d => d.data.name);
-
-  d3.select('body')
-    .append('div')
-    .node()
-    .appendChild(svg.node());
-
-  return svg;
 }
 
-async function numberPrsNewContributorsAccepted(user, repo, size, callback) {
+async function numberPrsNewContributorsAccepted(user, repo, size, divId) {
   const prs = await getPrs(user, repo);
-  // console.log(prs);
 
   // get first PR of each user in the repo:
   const firstPrs = {};
@@ -132,11 +124,9 @@ async function numberPrsNewContributorsAccepted(user, repo, size, callback) {
   // console.log(`notAcceptedPrs: ${notAcceptedPrs}`);
   // console.log(`acceptedPrs: ${acceptedPrs}`);
 
-  const donutChart = numberPrsNewContributorsAcceptedDonutChart(
-    notAcceptedPrs, acceptedPrs, size,
+  numberPrsNewContributorsAcceptedDonutChart(
+    notAcceptedPrs, acceptedPrs, size, divId,
   );
-
-  callback(donutChart);
 }
 
 export default numberPrsNewContributorsAccepted;
