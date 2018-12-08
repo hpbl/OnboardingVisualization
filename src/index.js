@@ -4,6 +4,7 @@ import 'babel-polyfill';
 
 import changeH1Color from './teste';
 import numberPrsNewContributorsAccepted from './newContributorsPRs';
+import { forksResultedInPR } from './forksPRs';
 
 // Log the parts object to our browser's console
 d3.select('body').style('background-color', 'lightblue');
@@ -14,9 +15,7 @@ const username = 'CMU-Perceptual-Computing-Lab';
 const projectName = 'openpose';
 
 // Number of PRs oppened by new contributors
-numberPrsNewContributorsAccepted(
-  username,
-  projectName,
-  500,
-  'firstPRs',
-);
+numberPrsNewContributorsAccepted(username, projectName, 500, 'firstPRs');
+
+// Number of forks that resulted in PRs
+forksResultedInPR(username, projectName, 'forksPRs');
