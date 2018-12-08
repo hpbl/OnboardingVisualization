@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 
 // sections :: [{name: String, count: Int, color: String}]
 export function donutChart(sections, size, divId) {
-  console.log('CHAMOU dataVisualizer');
+  // console.log('CHAMOU dataVisualizer');
   const width = size;
   const height = size;
 
@@ -61,5 +61,13 @@ export function donutChart(sections, size, divId) {
     .attr('font-family', 'consolas')
     .text(d => d.data.name);
 }
+
+// // data :: [{name:String, count:(Int, Int), colors(Stirng, String)}]
+// export function overlappingHistogram(data, size, divId) {
+//   const width = size.width;
+//   const height = size.height;
+//
+//   // const
+// }
 
 export default { donutChart };

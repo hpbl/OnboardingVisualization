@@ -18,9 +18,24 @@ export async function getPrs(user, repo) {
   return prsList;
 }
 
+
+// Possible values for status:
+// 'APPROVED', 'APPROVED_AFTER_CHANGE', 'CHANGES_REQUESTED', 'PENDING'
+function prReviewState(pr) {
+  let status = '';
+
+  for (let i = 0; i < pr.review.length; i += 1) {
+    if (status === 'CHANGES_REQUESTED' && pr.review[i].state === 'APPROVED') status = 'APPROVED_AFTER_CHANGE';
+    if (status === '' && (pr.review[i].state === 'APPROVED' || pr.review[i].state === 'CHANGES_REQUESTED')) status = pr.review[i].state;
+  }
+
+  if (status === '') status = 'PENDING';
+
+  return status;
+}
+
 export async function getReviewsForPrs(user, repo) {
   const prs = await getPrs(user, repo);
-  console.log(prs);
   for (let i = 0; i < prs.length; i += 1) {
     prs[i].review = [];
     let page = 1;
@@ -33,10 +48,11 @@ export async function getReviewsForPrs(user, repo) {
       prs[i].review = prs[i].review.concat(promiseValue);
       page += 1;
     }
+
+    if (prs[i].review) prs[i].reviewStatus = prReviewState(prs[i]);
   }
 
   return prs;
 }
-
 
 export default { getPrs, getReviewsForPrs };

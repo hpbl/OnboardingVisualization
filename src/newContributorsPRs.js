@@ -5,7 +5,8 @@ import { donutChart } from './dataVisualizer';
 
 async function numberPrsNewContributorsAccepted(user, repo, size, divId) {
   const prs = await getPrs(user, repo);
-
+  // for (let i = 0; i < prs.length; i += 1) {
+  // }
   // get first PR of each user in the repo:
   const firstPrs = {};
   for (let i = 0; i < prs.length; i += 1) {
