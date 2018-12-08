@@ -2,7 +2,6 @@ import * as d3 from 'd3';
 
 // sections :: [{name: String, count: Int, color: String}]
 export function donutChart(sections, size, divId) {
-  console.log('CHAMOU dataVisualizer');
   const width = size;
   const height = size;
 

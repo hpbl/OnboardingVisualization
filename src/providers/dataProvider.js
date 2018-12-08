@@ -19,4 +19,13 @@ export async function getPrs(user, repo) {
 }
 
 
-export default { getPrs };
+export async function getRepo(user, repo) {
+  const fetchResult = await fetch(`https://api.github.com/repos/${user}/${repo}?access_token=${token}`);
+  const promise = fetchResult.json();
+  const promiseValue = await promise.then(value => value);
+
+  return promiseValue;
+}
+
+
+export default { getPrs, getRepo };
