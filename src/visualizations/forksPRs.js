@@ -1,5 +1,6 @@
 import { getRepo, getPrs } from '../providers/dataProvider';
 import { donutChart } from '../providers/dataVisualizer';
+import { colors } from '../colorPalette';
 
 function prFromGhostForks(pr) {
   return pr.head.repo === null;
@@ -34,8 +35,8 @@ export async function forksResultedInPR(user, repo, divId) {
   const numberPRsFromForks = prsData.filter(prIsFromFork).length;
 
   const prsFromForksdata = [
-    { name: 'PRs from forks', count: numberPRsFromForks, color: '#E16E79' },
-    { name: 'Own PRs', count: prsData.length - numberPRsFromForks, color: '#364EB9' },
+    { name: 'PRs from forks', count: numberPRsFromForks, color: colors.blue },
+    { name: 'Own PRs', count: prsData.length - numberPRsFromForks, color: colors.purple },
   ];
   donutChart(prsFromForksdata, 500, divId);
 
@@ -46,9 +47,9 @@ export async function forksResultedInPR(user, repo, divId) {
   const nonContributingForks = totalForks - (contributingUniqueForks + unknownContributingForks);
 
   const contributingForksData = [
-    { name: 'Unique Forks with contributions', count: contributingUniqueForks, color: '#E16E79' },
-    { name: 'Forks without contributions', count: nonContributingForks, color: '#364EB9' },
-    { name: 'Deleted forks with contributions', count: unknownContributingForks, color: '#364EB9' },
+    { name: 'Unique Forks with contributions', count: contributingUniqueForks, color: colors.green },
+    { name: 'Forks without contributions', count: nonContributingForks, color: colors.pink },
+    { name: 'Deleted forks with contributions', count: unknownContributingForks, color: colors.white },
   ];
   donutChart(contributingForksData, 500, divId);
 }

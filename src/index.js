@@ -1,4 +1,3 @@
-// Use a Node.js core library
 import * as d3 from 'd3';
 import 'babel-polyfill';
 
