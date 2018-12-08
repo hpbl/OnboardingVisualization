@@ -1,5 +1,5 @@
-import { getRepo, getPrs } from './dataProvider';
-import { donutChart } from './dataVisualizer';
+import { getRepo, getPrs } from '../providers/dataProvider';
+import { donutChart } from '../providers/dataVisualizer';
 
 function prFromGhostForks(pr) {
   return pr.head.repo === null;
