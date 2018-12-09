@@ -19,8 +19,7 @@ export function donutChart(sections, size, divId) {
     .sort(null)
     .value(d => d.count);
 
-  const svg = d3.select('div')
-    .attr('id', divId)
+  const svg = d3.select(`#${divId}`)
     .append('svg')
     .attr('width', width)
     .attr('height', height)
