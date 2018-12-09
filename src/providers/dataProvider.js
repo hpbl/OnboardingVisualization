@@ -37,7 +37,8 @@ export async function getRepo(user, repo) {
 export async function getIssues(user, repo) {
   const requestParameters = `?state=all&per_page=100&access_token=${token}`;
   const baseURL = `https://api.github.com/repos/${user}/${repo}/issues${requestParameters}`;
-  return paginate(baseURL);
+  const issuesAndPRs = await paginate(baseURL);
+  return issuesAndPRs.filter(pr => !pr.pull_request);
 }
 
 

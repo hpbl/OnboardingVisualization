@@ -12,7 +12,14 @@ function getContributingForks(prs) {
 
   for (let i = 0; i < prs.length; i += 1) {
     const pr = prs[i];
-    const forkName = pr.head.label.split(':')[0];
+    let forkName;
+
+    if (pr.head.label === null) {
+      forkName = 'UNKNOWN';
+    } else {
+      const ownerName = pr.head.label.split(':')[0];
+      forkName = ownerName;
+    }
 
     if (prFromGhostForks(pr)) {
       unknownForks.push(forkName);
