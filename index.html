@@ -4,14 +4,19 @@
     <meta charset="utf-8">
     <title>Onboarding Visualization</title>
     <link rel="icon" type="image/x-icon" class="js-site-favicon" href="assets/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
+    <link rel="stylesheet" href="./index.css">
   </head>
   <body>
-    <h1>Hello, world!</h1>
-    <h4>Now with CD power!</h4>
-    <h4>And linting!</h4>
-    <div id="firstPRs"></div>
-    <div id="forksPRs"></div>
-    <div id="readeIssues"></div>
+    <div class='wholeScreen'>
+      <h1>Onboarding Visualization</h1>
+      <h3>Is your repository friendly to newcomers?</h3>
+      <h4>github.com/
+        <input type="text" name="username" placeholder="username">
+        /
+        <input class="repo" type="text" name="repository" placeholder="repository">
+      </h4>
+    </div>
   </body>
 
   <script src="src/index.js" type="text/javascript"></script>

@@ -1,0 +1,43 @@
+body {
+  font-family: 'Didact Gothic', sans-serif;
+  margin-top: 0;
+}
+
+h1 {
+  font-weight: 200;
+  font-size: 70px;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+h3 {
+  margin-top: 5px;
+  font-weight: 200;
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+h4 {
+  font-size: 25px;
+  font-weight: 200;
+  margin-top: 5px;
+}
+
+input {
+  border: 0;
+  font-size: 25px;
+  font-weight: 200;
+  width: 120px;
+}
+
+.repo {
+  width: 160px;
+}
+
+.wholeScreen {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
