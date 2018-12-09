@@ -2,7 +2,6 @@ import * as d3 from 'd3';
 
 // sections :: [{name: String, count: Int, color: String}]
 export function donutChart(sections, size, divId) {
-  console.log('CHAMOU dataVisualizer');
   const width = size;
   const height = size;
 
@@ -62,4 +61,54 @@ export function donutChart(sections, size, divId) {
     .text(d => d.data.name);
 }
 
-export default { donutChart };
+export function timeline(dateData, divId, initialDate) {
+  console.log(initialDate);
+  console.log(dateData);
+  const width = 1000;
+  const height = 400;
+  const padding = 100;
+
+  // create an svg container
+  const vis = d3.select(`#${divId}`)
+    .append('svg:svg')
+    .attr('width', width)
+    .attr('height', height);
+
+  // define the x scale (horizontal)
+  const mindate = initialDate;
+  const maxdate = new Date();
+
+  const x = d3.scaleLinear()
+    .domain([mindate, maxdate]) // values between for month of january
+    .range([padding, width - padding]); // map these the the chart width = total
+
+  const y = d3.scaleLinear()
+    .domain([0, 0])
+    .range([height - padding, height - padding]);
+  // draw x axis with labels and move to the bottom of the chart area
+  vis.append('g')
+    .attr('class', 'xaxis') // give it a class so it can be used to select only xaxis labels  below
+    .attr('transform', `translate(0,${height - padding})`)
+    .call(d3.axisBottom(x)
+      .tickFormat(d3.timeFormat('%B/%Y')))
+    .selectAll('text')
+    .style('text-anchor', 'end')
+    .attr('dx', '-.8em')
+    .attr('dy', '.15em')
+    .attr('transform', 'rotate(-65)');
+
+  vis.append('g')
+    .selectAll('circle')
+    .data(dateData)
+    .enter()
+    .append('circle')
+    .attr('r', d => d.count * 2)
+    .attr('cx', d => x(d.day))
+    .attr('cy', y(0))
+    .attr('opacity', 0.7);
+}
+
+export default {
+  donutChart,
+  timeline,
+};
