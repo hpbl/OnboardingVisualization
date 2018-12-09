@@ -5,8 +5,13 @@ import { forksResultedInPR } from './visualizations/forksPRs';
 import { readmeIssues } from './visualizations/readmeIssues';
 
 // User input
-const username = 'CMU-Perceptual-Computing-Lab';
-const projectName = 'openpose';
+const urlParams = new URLSearchParams(window.location.search);
+
+const username = urlParams.get('user');
+const projectName = urlParams.get('repo');
+
+// const username = 'CMU-Perceptual-Computing-Lab';
+// const projectName = 'openpose';
 
 // Number of PRs oppened by new contributors
 numberPrsNewContributorsAccepted(username, projectName, 500, 'firstPRs');
