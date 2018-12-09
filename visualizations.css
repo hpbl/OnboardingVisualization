@@ -34,7 +34,7 @@ h4 {
   align-items: center;
 }
 
-#forksPRs {
+.visualization {
   display: flex;
   flex: 1;
   justify-content: center;

@@ -62,8 +62,7 @@ export function donutChart(sections, size, divId) {
 
 
 export function textualValue(text, divId) {
-  d3.select('div')
-    .attr('id', divId)
+  d3.select(`#${divId}`)
     .append('h1')
     .text(text);
 }
