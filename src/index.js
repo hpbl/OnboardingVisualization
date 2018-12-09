@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import 'babel-polyfill';
 
+import releaseFrequency from './visualizations/releaseFrequency';
 import numberPrsNewContributorsAccepted from './visualizations/newContributorsPRs';
 import { forksResultedInPR } from './visualizations/forksPRs';
 import { readmeIssues } from './visualizations/readmeIssues';
@@ -20,3 +21,11 @@ forksResultedInPR(username, projectName, 'forksPRs');
 
 // Issues related to README
 readmeIssues(username, projectName, 'readmeIssues');
+
+// Number of PRs oppened by new contributors
+releaseFrequency(
+  username,
+  projectName,
+  500,
+  'releaseFrequency',
+);
