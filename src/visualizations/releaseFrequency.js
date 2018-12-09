@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
 
-import { getReleases, getRepo } from './dataProvider';
-import { timeline } from './dataVisualizer';
+import { getReleases, getRepo } from '../dataProvider';
+import { timeline } from '../providers/dataVisualizer';
 
 // date format to year-month-day
 function formatDate(date) {

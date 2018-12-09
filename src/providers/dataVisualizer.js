@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import { colors } from '../colorPalette';
 
 // sections :: [{name: String, count: Int, color: String}]
 export function donutChart(sections, size, divId) {
@@ -61,9 +62,15 @@ export function donutChart(sections, size, divId) {
     .text(d => d.data.name);
 }
 
+
+export function textualValue(text, divId) {
+  d3.select('div')
+    .attr('id', divId)
+    .append('h1')
+    .text(text);
+}
+
 export function timeline(dateData, divId, initialDate) {
-  console.log(initialDate);
-  console.log(dateData);
   const width = 1000;
   const height = 400;
   const padding = 100;
@@ -77,6 +84,10 @@ export function timeline(dateData, divId, initialDate) {
   // define the x scale (horizontal)
   const mindate = initialDate;
   const maxdate = new Date();
+
+  const scale = d3.scaleLinear()
+    .domain([0, 1])
+    .range([0, Math.max(...dateData.map(d => d.count))]);
 
   const x = d3.scaleLinear()
     .domain([mindate, maxdate]) // values between for month of january
@@ -102,13 +113,15 @@ export function timeline(dateData, divId, initialDate) {
     .data(dateData)
     .enter()
     .append('circle')
-    .attr('r', d => d.count * 2)
+    .attr('r', d => scale(d.count))
     .attr('cx', d => x(d.day))
     .attr('cy', y(0))
-    .attr('opacity', 0.7);
+    .attr('opacity', 0.7)
+    .attr('fill', colors.purple);
 }
 
 export default {
   donutChart,
   timeline,
+  textualValue,
 };
