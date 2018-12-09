@@ -61,4 +61,12 @@ export function donutChart(sections, size, divId) {
     .text(d => d.data.name);
 }
 
-export default { donutChart };
+
+export function textualValue(text, divId) {
+  d3.select('div')
+    .attr('id', divId)
+    .append('h1')
+    .text(text);
+}
+
+export default { donutChart, textualValue };
