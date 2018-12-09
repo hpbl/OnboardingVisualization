@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import { colors } from '../colorPalette';
 
 // sections :: [{name: String, count: Int, color: String}]
 export function donutChart(sections, size, divId) {
@@ -67,4 +68,58 @@ export function textualValue(text, divId) {
     .text(text);
 }
 
-export default { donutChart, textualValue };
+export function timeline(dateData, divId, initialDate) {
+  const width = 1000;
+  const height = 400;
+  const padding = 100;
+
+  // create an svg container
+  const vis = d3.select(`#${divId}`)
+    .append('svg:svg')
+    .attr('width', width)
+    .attr('height', height);
+
+  // define the x scale (horizontal)
+  const mindate = initialDate;
+  const maxdate = new Date();
+
+  const scale = d3.scaleLinear()
+    .domain([0, 1])
+    .range([0, Math.max(...dateData.map(d => d.count))]);
+
+  const x = d3.scaleLinear()
+    .domain([mindate, maxdate]) // values between for month of january
+    .range([padding, width - padding]); // map these the the chart width = total
+
+  const y = d3.scaleLinear()
+    .domain([0, 0])
+    .range([height - padding, height - padding]);
+  // draw x axis with labels and move to the bottom of the chart area
+  vis.append('g')
+    .attr('class', 'xaxis') // give it a class so it can be used to select only xaxis labels  below
+    .attr('transform', `translate(0,${height - padding})`)
+    .call(d3.axisBottom(x)
+      .tickFormat(d3.timeFormat('%B/%Y')))
+    .selectAll('text')
+    .style('text-anchor', 'end')
+    .attr('dx', '-.8em')
+    .attr('dy', '.15em')
+    .attr('transform', 'rotate(-65)');
+
+  vis.append('g')
+    .selectAll('circle')
+    .data(dateData)
+    .enter()
+    .append('circle')
+    .attr('r', d => scale(d.count))
+    .attr('cx', d => x(d.day))
+    .attr('cy', y(0))
+    .attr('opacity', 0.7)
+    .attr('fill', colors.purple);
+}
+
+export default {
+  donutChart,
+  timeline,
+  textualValue,
+};
