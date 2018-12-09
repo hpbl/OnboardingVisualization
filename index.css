@@ -35,9 +35,22 @@ input {
 }
 
 .wholeScreen {
+  margin-top: -50px;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.navbar {
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.about {
+  margin-right: 60px;
 }
