@@ -1,5 +1,5 @@
 /* eslint-disable no-await-in-loop */
-import { colors } from '../colorPalette';
+import { colors } from '../util/colorPalette';
 import { getPrs } from '../providers/dataProvider';
 import { donutChart } from '../providers/dataVisualizer';
 
