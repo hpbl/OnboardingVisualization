@@ -31,6 +31,10 @@ input {
   width: 120px;
 }
 
+input:focus {
+  outline: none;
+}
+
 #repo {
   width: 160px;
 }
@@ -54,4 +58,9 @@ input {
 
 .about {
   margin-right: 60px;
+}
+
+#errorMessage {
+  display: none;
+  color: red;
 }
