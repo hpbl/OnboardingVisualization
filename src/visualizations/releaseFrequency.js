@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
 
 import { getReleases, getRepo } from '../providers/dataProvider';
-import { timeline } from '../providers/dataVisualizer';
+import { timeline, textualValue } from '../providers/dataVisualizer';
 
 // date format to year-month-day
 function formatDate(date) {
@@ -33,6 +33,34 @@ async function releaseFrequency(user, repo, size, divId) {
   releaseDates = Object.values(releaseDates);
   // passing initial date = repo created
   const repoCreatedDate = new Date(repoData.created_at);
+
+  const repoExistingTime = releaseDates[0].day - repoCreatedDate;
+  const daysRepoExisting = repoExistingTime / (1000 * 60 * 60 * 24);
+  const numberOfReleases = releaseDates.length;
+  let daysReleaseFrequency = daysRepoExisting / numberOfReleases;
+
+  let releaseFrequencyStr = '';
+  if (numberOfReleases === 0) {
+    releaseFrequencyStr = 'We hope to see you releasing soon!';
+  } else if (daysReleaseFrequency < 1) {
+    let hoursReleaseFrequency = daysReleaseFrequency * 24;
+    hoursReleaseFrequency = Math.round(hoursReleaseFrequency);
+    if (hoursReleaseFrequency === 1) {
+      releaseFrequencyStr = 'A release occurs <strong>every hour</strong>';
+    } else {
+      releaseFrequencyStr = `A release occurs every <strong>${hoursReleaseFrequency} hours</strong>`;
+    }
+  } else {
+    daysReleaseFrequency = Math.round(daysReleaseFrequency);
+    if (daysReleaseFrequency === 1) {
+      releaseFrequencyStr = 'A release occurs <strong>everyday<strong>';
+    } else {
+      releaseFrequencyStr = `A release occurs every <strong>${daysReleaseFrequency} days<strong>`;
+    }
+  }
+
+  textualValue(releaseFrequencyStr, divId);
+
   timeline(releaseDates, divId, repoCreatedDate);
 }
 

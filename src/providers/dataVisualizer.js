@@ -148,37 +148,6 @@ export function timeline(dateData, divId, initialDate) {
     .attr('cy', y(0))
     .attr('opacity', 0.7)
     .attr('fill', colors.purple);
-
-  const repoExistingTime = dateData[0].day - initialDate;
-  const daysRepoExisting = repoExistingTime / (1000 * 60 * 60 * 24);
-  const numberOfReleases = dateData.length;
-  let daysReleaseFrequency = daysRepoExisting / numberOfReleases;
-
-  let releaseFrequencyStr = '';
-  if (numberOfReleases === 0) {
-    releaseFrequencyStr = 'We hope to see you releasing soon!';
-  } else if (daysReleaseFrequency < 1) {
-    let hoursReleaseFrequency = daysReleaseFrequency * 24;
-    hoursReleaseFrequency = Math.round(hoursReleaseFrequency);
-    if (hoursReleaseFrequency === 1) {
-      releaseFrequencyStr = 'A release occurs every hour';
-    } else {
-      releaseFrequencyStr = `A release occurs every ${hoursReleaseFrequency} hours`;
-    }
-  } else {
-    daysReleaseFrequency = Math.round(daysReleaseFrequency);
-    if (daysReleaseFrequency === 1) {
-      releaseFrequencyStr = 'A release occurs everyday';
-    } else {
-      releaseFrequencyStr = `A release occurs every ${daysReleaseFrequency} days`;
-    }
-  }
-
-  vis.append('g')
-    .append('text')
-    .attr('dx', '10em')
-    .attr('dy', '.80em')
-    .text(releaseFrequencyStr);
 }
 
 export function densityPlot(sections, size, divId) {
