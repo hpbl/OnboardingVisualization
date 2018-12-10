@@ -5,6 +5,7 @@ import { forksResultedInPR } from './visualizations/forksPRs';
 import { readmeIssues } from './visualizations/readmeIssues';
 import releaseFrequency from './visualizations/releaseFrequency';
 import timeAcceptReviewPrs from './visualizations/timeAcceptReviewPRs';
+import { requestedChanges } from './visualizations/requestedChanges';
 
 // User input
 const urlParams = new URLSearchParams(window.location.search);
@@ -26,6 +27,9 @@ readmeIssues(username, projectName, 'readmeIssues');
 
 // Number of PRs oppened by new contributors
 releaseFrequency(username, projectName, 500, 'releaseFrequency');
+
+// Number of requested changes on PRs
+requestedChanges(username, projectName, 500, 'requestedChanges');
 
 // Time to accept and review PRs
 timeAcceptReviewPrs(

@@ -1,5 +1,5 @@
-import { getReviewsForPrs } from './dataProvider';
-import { overlappingHistogram } from './dataVisualizer';
+import { getReviewsForPrs } from '../providers/dataProvider';
+import { overlappingHistogram } from '../providers/dataVisualizer';
 
 export async function requestedChanges(user, repo, size, divId) {
   const prs = await getReviewsForPrs(user, repo);
