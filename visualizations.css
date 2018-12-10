@@ -47,7 +47,7 @@ a {
   text-decoration: inherit;
 }
 
-#readmeIssues {
+#readmeIssues, #releaseFrequency {
   display: flex;
   flex-direction: column;
 }
@@ -71,12 +71,12 @@ a {
     content: '_ ';
 }
 
-#readmeIssues > h1 {
+#readmeIssues > h1, #releaseFrequency > h1 {
   font-size: 30px;
   font-weight: 200;
 }
 
-#readmeIssues > h1 > strong {
+#readmeIssues > h1 > strong, #releaseFrequency > h1 > strong {
   font-size: 40px;
   font-weight: 400;
 }
