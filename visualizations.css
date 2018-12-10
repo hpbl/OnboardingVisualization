@@ -1,5 +1,5 @@
 body {
-  font-family: 'Didact Gothic', sans-serif;
+  font-family: adobe-heiti-std, sans-serif;
   margin-top: 0;
 }
 
@@ -14,7 +14,7 @@ body {
 }
 
 .home {
-  font-size: 30px;
+  font-size: 25px;
 }
 
 h4 {
