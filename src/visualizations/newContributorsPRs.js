@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
-import { colors } from './colorPalette';
-import { getPrs } from './dataProvider';
-import { donutChart } from './dataVisualizer';
+import { colors } from '../util/colorPalette';
+import { getPrs } from '../providers/dataProvider';
+import { donutChart } from '../providers/dataVisualizer';
 
 async function numberPrsNewContributorsAccepted(user, repo, size, divId) {
   const prs = await getPrs(user, repo);
