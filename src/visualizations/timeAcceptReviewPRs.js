@@ -5,6 +5,7 @@
 
 import { getPrs, getPrReviewsList } from '../providers/dataProvider';
 import { densityPlot } from '../providers/dataVisualizer';
+import { colors } from '../util/colorPalette';
 
 function getPrStart(pr) {
   const startStr = pr.created_at;
@@ -110,8 +111,8 @@ async function timeAcceptReviewPrs(user, repo, size, divId) {
   }
 
   const sections = [
-    { data: acceptancePerQuantityList, color: '#FF0000' },
-    { data: reviewPerQuantityList, color: '#00BB00' },
+    { data: acceptancePerQuantityList, color: colors.pink },
+    { data: reviewPerQuantityList, color: colors.green },
   ];
 
   densityPlot(sections, size, divId);

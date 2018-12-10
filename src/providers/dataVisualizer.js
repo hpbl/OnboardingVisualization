@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { colors } from '../colorPalette';
+import { colors } from '../util/colorPalette';
 
 // sections :: [{name: String, count: Int, color: String}]
 export function donutChart(sections, size, divId) {
@@ -141,8 +141,7 @@ export function densityPlot(sections, size, divId) {
     .domain(axisDomain.y)
     .range([height - margin.bottom, margin.top]);
 
-  const svg = d3.select('div')
-    .attr('id', divId)
+  const svg = d3.select(`#${divId}`)
     .append('svg')
     .attr('width', width)
     .attr('height', height)
