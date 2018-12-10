@@ -1,6 +1,6 @@
 /* eslint-disable no-await-in-loop */
 
-import { getReleases, getRepo } from '../dataProvider';
+import { getReleases, getRepo } from '../providers/dataProvider';
 import { timeline } from '../providers/dataVisualizer';
 
 // date format to year-month-day
