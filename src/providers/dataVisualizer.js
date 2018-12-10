@@ -123,7 +123,9 @@ export function timeline(dateData, divId, initialDate) {
   let daysReleaseFrequency = daysRepoExisting / numberOfReleases;
 
   let releaseFrequencyStr = '';
-  if (daysReleaseFrequency < 1) {
+  if (numberOfReleases === 0) {
+    releaseFrequencyStr = 'We hope to see you releasing soon!';
+  } else if (daysReleaseFrequency < 1) {
     let hoursReleaseFrequency = daysReleaseFrequency * 24;
     hoursReleaseFrequency = Math.round(hoursReleaseFrequency);
     if (hoursReleaseFrequency === 1) {
