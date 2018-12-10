@@ -42,8 +42,8 @@ export async function forksResultedInPR(user, repo, divId) {
   const numberPRsFromForks = prsData.filter(prIsFromFork).length;
 
   const prsFromForksdata = [
-    { name: 'PRs from forks', count: numberPRsFromForks, color: colors.blue },
-    { name: 'Own PRs', count: prsData.length - numberPRsFromForks, color: colors.purple },
+    { name: 'PRs from forks', count: numberPRsFromForks, color: colors.pink },
+    { name: 'Own PRs', count: prsData.length - numberPRsFromForks, color: colors.green },
   ];
   donutChart(prsFromForksdata, 500, divId);
 

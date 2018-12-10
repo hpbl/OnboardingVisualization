@@ -72,6 +72,56 @@ export async function getReleases(user, repo) {
   return releasesList;
 }
 
+// Possible values for status:
+// 'APPROVED', 'APPROVED_AFTER_CHANGE', 'CHANGES_REQUESTED', 'PENDING'
+function prReviewState(pr) {
+  let status = '';
+  for (let i = 0; i < pr.review.length; i += 1) {
+    if (status === 'CHANGES_REQUESTED' && (pr.review[i].state === 'APPROVED' || pr.margedAt)) status = 'APPROVED_AFTER_CHANGE';
+    if (status === '' && (pr.review[i].state === 'APPROVED' || pr.review[i].state === 'CHANGES_REQUESTED')) status = pr.review[i].state;
+  }
+
+  if (status === '') status = 'PENDING';
+
+  return status;
+}
+
+function numberOfChanges(pr) {
+  let changes = 0;
+  for (let i = 0; i < pr.review.length; i += 1) {
+    if (pr.review[i].state === 'CHANGES_REQUESTED') changes += 1;
+  }
+
+  return changes;
+}
+
+export async function getReviewsForPrs(user, repo) {
+  const prs = await getPrs(user, repo);
+  for (let i = 0; i < prs.length; i += 1) {
+    prs[i].review = [];
+    let page = 1;
+    let promiseValue = [0];
+    while (promiseValue.length !== 0) {
+      const fetchResult = await fetch(`https://api.github.com/repos/${user}/${repo}/pulls/${prs[i].number}/reviews?access_token=${token}&page=${page}&per_page=100`);
+      const promise = fetchResult.json();
+      promiseValue = await promise.then(value => value);
+
+      prs[i].review = prs[i].review.concat(promiseValue);
+      page += 1;
+    }
+
+    if (prs[i].review) prs[i].reviewStatus = prReviewState(prs[i]);
+    if (prs[i].review) {
+      prs[i].numberOfChanges = numberOfChanges(prs[i]);
+    } else {
+      prs[i].numberOfChanges = undefined;
+    }
+  }
+
+  return prs;
+}
+
+
 export default {
-  isValidRepo, getPrs, getRepo, getIssues, getPrReviewsList, getReleases,
+  getReviewsForPrs, isValidRepo, getPrs, getRepo, getIssues, getPrReviewsList, getReleases,
 };
