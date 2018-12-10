@@ -47,7 +47,15 @@ export async function getIssues(user, repo) {
   return issuesAndPRs.filter(pr => !pr.pull_request);
 }
 
+export async function getPrReviewsList(user, repo, prNumber) {
+  const fetchResult = await fetch(`https://api.github.com/repos/${user}/${repo}/pulls/${prNumber}/reviews?access_token=${token}`);
+  const promise = fetchResult.json();
+  const promiseValue = await promise.then(value => value);
+  const commentsList = await promiseValue;
+
+  return commentsList;
+}
 
 export default {
-  isValidRepo, getPrs, getRepo, getIssues,
+  isValidRepo, getPrs, getRepo, getIssues, getPrReviewsList,
 };
