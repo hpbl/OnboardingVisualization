@@ -68,6 +68,38 @@ export function textualValue(text, divId) {
     .text(text);
 }
 
+export function issuesList(issues, divId) {
+  // Define the div for the tooltip
+  const tooltip = d3.select(`#${divId}`).append('div')
+    .attr('class', 'tooltip')
+    .style('opacity', 0);
+
+  const ul = d3.select(`#${divId}`)
+    .append('ul');
+
+  ul.selectAll('li')
+    .data(issues)
+    .enter()
+    .append('li')
+    .append('a')
+    .attr('href', issue => issue.html_url)
+    .attr('target', '_blank')
+    .text(issue => `#${issue.number}`)
+    .on('mouseover', (d) => {
+      tooltip.transition()
+        .duration(200)
+        .style('opacity', 0.9);
+      tooltip.html(d.title)
+        .style('left', `${d3.event.pageX}px`)
+        .style('top', `${d3.event.pageY - 28}px`);
+    })
+    .on('mouseout', () => {
+      tooltip.transition()
+        .duration(200)
+        .style('opacity', 0);
+    });
+}
+
 export function timeline(dateData, divId, initialDate) {
   const width = 1000;
   const height = 400;
@@ -122,4 +154,5 @@ export default {
   donutChart,
   timeline,
   textualValue,
+  issuesList,
 };
