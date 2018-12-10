@@ -116,6 +116,18 @@ export function timeline(dateData, divId, initialDate) {
     .attr('cy', y(0))
     .attr('opacity', 0.7)
     .attr('fill', colors.purple);
+
+  const repoExistingTime = dateData[0].day - initialDate;
+  const daysRepoExisting = repoExistingTime / (1000 * 60 * 60 * 24);
+  const numberOfReleases = dateData.length;
+  let daysReleaseFrequency = daysRepoExisting / numberOfReleases;
+  daysReleaseFrequency = daysReleaseFrequency.toFixed(2);
+
+  vis.append('g')
+    .append('text')
+    .attr('dx', '-.8em')
+    .attr('dy', '.40em')
+    .text(`A release occurs every ${daysReleaseFrequency} days`);
 }
 
 export default {
