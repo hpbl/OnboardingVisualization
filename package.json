@@ -7,7 +7,7 @@
     "start": "parcel index.html visualizations.html",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./src --fix",
-    "build": "parcel build index.html --public-url /OnboardingVisualization/"
+    "build": "parcel build index.html visualizations.html --public-url /OnboardingVisualization/"
   },
   "repository": {
     "type": "git",
