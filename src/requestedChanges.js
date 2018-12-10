@@ -24,11 +24,7 @@ export async function requestedChanges(user, repo, size, divId) {
   }
 
   const keys = Object.keys(data);
-  console.log(keys);
-  for (let i = 0; i < keys.length; i += 1) {
-    console.log(keys[i]);
-    console.log(data[keys[i]]);
-  }
+
   const filteredData = [];
   for (let i = 0; i < keys.length; i += 1) {
     filteredData.push({
