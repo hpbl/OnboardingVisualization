@@ -121,13 +121,30 @@ export function timeline(dateData, divId, initialDate) {
   const daysRepoExisting = repoExistingTime / (1000 * 60 * 60 * 24);
   const numberOfReleases = dateData.length;
   let daysReleaseFrequency = daysRepoExisting / numberOfReleases;
-  daysReleaseFrequency = daysReleaseFrequency.toFixed(2);
+
+  let releaseFrequencyStr = '';
+  if (daysReleaseFrequency < 1) {
+    let hoursReleaseFrequency = daysReleaseFrequency * 24;
+    hoursReleaseFrequency = Math.round(hoursReleaseFrequency);
+    if (hoursReleaseFrequency === 1) {
+      releaseFrequencyStr = 'A release occurs every hour';
+    } else {
+      releaseFrequencyStr = `A release occurs every ${hoursReleaseFrequency} hours`;
+    }
+  } else {
+    daysReleaseFrequency = Math.round(daysReleaseFrequency);
+    if (daysReleaseFrequency === 1) {
+      releaseFrequencyStr = 'A release occurs everyday';
+    } else {
+      releaseFrequencyStr = `A release occurs every ${daysReleaseFrequency} days`;
+    }
+  }
 
   vis.append('g')
     .append('text')
-    .attr('dx', '-.8em')
-    .attr('dy', '.40em')
-    .text(`A release occurs every ${daysReleaseFrequency} days`);
+    .attr('dx', '10em')
+    .attr('dy', '.80em')
+    .text(releaseFrequencyStr);
 }
 
 export default {
