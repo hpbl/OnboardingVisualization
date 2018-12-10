@@ -46,3 +46,37 @@ a {
   color: inherit;
   text-decoration: inherit;
 }
+
+#readmeIssues {
+  display: flex;
+  flex-direction: column;
+}
+
+#readmeIssues > ul {
+  list-style: none;
+  font-size: 30px;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 300px;
+}
+
+#readmeIssues > ul > li {
+  margin-bottom: 20px;
+  margin-right: 50px;
+}
+
+#readmeIssues > ul > li:before {
+    content: '_ ';
+}
+
+#readmeIssues > h1 {
+  font-size: 30px;
+  font-weight: 200;
+}
+
+#readmeIssues > h1 > strong {
+  font-size: 40px;
+  font-weight: 400;
+}

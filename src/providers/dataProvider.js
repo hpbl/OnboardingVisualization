@@ -47,7 +47,31 @@ export async function getIssues(user, repo) {
   return issuesAndPRs.filter(pr => !pr.pull_request);
 }
 
+export async function getPrReviewsList(user, repo, prNumber) {
+  const fetchResult = await fetch(`https://api.github.com/repos/${user}/${repo}/pulls/${prNumber}/reviews?access_token=${token}`);
+  const promise = fetchResult.json();
+  const promiseValue = await promise.then(value => value);
+  const commentsList = await promiseValue;
+
+  return commentsList;
+}
+
+export async function getReleases(user, repo) {
+  let releasesList = [];
+  let page = 1;
+  let promiseValue = [0];
+  while (promiseValue.length !== 0) {
+    const fetchResult = await fetch(`https://api.github.com/repos/${user}/${repo}/releases?access_token=${token}&page=${page}&per_page=100&state=all&sort=published_at`);
+    const promise = fetchResult.json();
+    promiseValue = await promise.then(value => value);
+
+    releasesList = releasesList.concat(promiseValue);
+    page += 1;
+  }
+
+  return releasesList;
+}
 
 export default {
-  isValidRepo, getPrs, getRepo, getIssues,
+  isValidRepo, getPrs, getRepo, getIssues, getPrReviewsList, getReleases,
 };

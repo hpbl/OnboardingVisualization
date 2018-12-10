@@ -1,6 +1,6 @@
 import { getRepo, getPrs } from '../providers/dataProvider';
 import { donutChart } from '../providers/dataVisualizer';
-import { colors } from '../colorPalette';
+import { colors } from '../util/colorPalette';
 
 function prFromGhostForks(pr) {
   return pr.head.repo === null;
