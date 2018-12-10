@@ -201,7 +201,7 @@ export function densityPlot(sections, size, divId) {
       .tickFormat(formatAxis))
     .append('text')
     .attr('y', 4 * margin.left / 5)
-    .attr('transform', 'rotate(10)')
+    .attr('transform', 'rotate(-90), translate(-100, -140)')
     .attr('fill', '#000000')
     .attr('text-anchor', 'end')
     .attr('font-weight', 'bold')

@@ -29,7 +29,7 @@ readmeIssues(username, projectName, 'readmeIssues');
 releaseFrequency(username, projectName, 500, 'releaseFrequency');
 
 // Number of requested changes on PRs
-requestedChanges(username, projectName, 500, 'requestedChanges');
+requestedChanges(username, projectName, { width: 500, height: 500 }, 'requestedChanges');
 
 // Time to accept and review PRs
 timeAcceptReviewPrs(
