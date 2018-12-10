@@ -1,0 +1,66 @@
+body {
+font-family: adobe-heiti-std, sans-serif;
+margin-top: 0;
+color: #4A4A4A;
+}
+
+h1 {
+  font-weight: 200;
+  font-size: 70px;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+h3 {
+  margin-top: 5px;
+  font-weight: 200;
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+h4 {
+  font-size: 25px;
+  font-weight: 200;
+  margin-top: 5px;
+}
+
+input {
+  border: 0;
+  font-size: 25px;
+  font-weight: 200;
+  width: 120px;
+}
+
+input:focus {
+  outline: none;
+}
+
+#repo {
+  width: 160px;
+}
+
+.wholeScreen {
+  margin-top: -50px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar {
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.about {
+  margin-right: 60px;
+}
+
+#errorMessage {
+  display: none;
+  color: red;
+}

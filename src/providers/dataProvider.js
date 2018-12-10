@@ -2,6 +2,12 @@
 
 const token = '43aae801c5a8102a0468a7ce5398fac958611e6c';
 
+export async function isValidRepo(user, repo) {
+  const fetchResult = await fetch(`https://api.github.com/repos/${user}/${repo}`);
+
+  return fetchResult.ok;
+}
+
 async function paginate(baseURL) {
   let prsList = [];
   let page = 1;
@@ -42,4 +48,6 @@ export async function getIssues(user, repo) {
 }
 
 
-export default { getPrs, getRepo, getIssues };
+export default {
+  isValidRepo, getPrs, getRepo, getIssues,
+};

@@ -4,7 +4,7 @@
   "description": "Tool to visualize stats of open-source repositories",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html",
+    "start": "parcel index.html visualizations.html",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./src --fix",
     "build": "parcel build index.html --public-url /OnboardingVisualization/"

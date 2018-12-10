@@ -1,31 +1,35 @@
-import * as d3 from 'd3';
 import 'babel-polyfill';
 
-import releaseFrequency from './visualizations/releaseFrequency';
-import numberPrsNewContributorsAccepted from './visualizations/newContributorsPRs';
-import { forksResultedInPR } from './visualizations/forksPRs';
-import { readmeIssues } from './visualizations/readmeIssues';
+import { isValidRepo } from './providers/dataProvider';
+import applyFont from './util/font';
 
-// Log the parts object to our browser's console
-d3.select('body').style('background-color', 'lightblue');
+// Applying custom font
+applyFont(document);
 
-// User input
-const username = 'CMU-Perceptual-Computing-Lab';
-const projectName = 'openpose';
+// Get the input field
+const repoInput = document.getElementById('repo');
+const usernameInput = document.getElementById('username');
 
-// Number of PRs oppened by new contributors
-numberPrsNewContributorsAccepted(username, projectName, 500, 'firstPRs');
 
-// Number of forks that resulted in PRs
-forksResultedInPR(username, projectName, 'forksPRs');
+async function checkValidRepo(username, repo) {
+  const validRepo = await isValidRepo(username, repo);
+  if (validRepo) {
+    window.location.href = `visualizations.html?user=${username}&repo=${repo}`;
+  } else {
+    document.getElementById('errorMessage').style.display = 'block';
+  }
+}
 
-// Issues related to README
-readmeIssues(username, projectName, 'readmeIssues');
+// Execute a function when the user releases a key on the keyboard
+repoInput.addEventListener('keyup', (event) => {
+  // Cancel the default action, if needed
+  event.preventDefault();
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Trigger the button element with a click
+    const repo = repoInput.value;
+    const username = usernameInput.value;
 
-// Number of PRs oppened by new contributors
-releaseFrequency(
-  username,
-  projectName,
-  500,
-  'releaseFrequency',
-);
+    checkValidRepo(username, repo);
+  }
+});
