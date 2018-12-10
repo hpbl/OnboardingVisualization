@@ -11,7 +11,7 @@ export async function readmeIssues(username, projectName, divId) {
   });
 
   const proportion = `${readmeMentionedIssues.length} / ${issues.length}`;
-  textualValue(`${proportion} issues mention README`, divId);
+  textualValue(`<strong>${proportion}</strong> issues mention README`, divId);
 
   const sortedIssues = readmeMentionedIssues
     .sort((issueA, issueB) => issueA.number - issueB.number);

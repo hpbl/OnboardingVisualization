@@ -70,3 +70,13 @@ a {
 #readmeIssues > ul > li:before {
     content: '_ ';
 }
+
+#readmeIssues > h1 {
+  font-size: 30px;
+  font-weight: 200;
+}
+
+#readmeIssues > h1 > strong {
+  font-size: 40px;
+  font-weight: 400;
+}
