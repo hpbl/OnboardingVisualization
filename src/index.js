@@ -1,6 +1,10 @@
 import 'babel-polyfill';
 
 import { isValidRepo } from './providers/dataProvider';
+import applyFont from './util/font';
+
+// Applying custom font
+applyFont(document);
 
 // Get the input field
 const repoInput = document.getElementById('repo');
