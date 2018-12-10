@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-
+import { colors } from './colorPalette';
 // sections :: [{name: String, count: Int, color: String}]
 export function donutChart(sections, size, divId) {
   // console.log('CHAMOU dataVisualizer');
@@ -62,12 +62,64 @@ export function donutChart(sections, size, divId) {
     .text(d => d.data.name);
 }
 
-// // data :: [{name:String, count:(Int, Int), colors(Stirng, String)}]
-// export function overlappingHistogram(data, size, divId) {
-//   const width = size.width;
-//   const height = size.height;
-//
-//   // const
-// }
+// data :: [{name: Int, count: [biggerSet: Int, smallerSet: Int]}]
+export function overlappingHistogram(data, size, divId) {
+  // Adjusting data
+  const numberOfData = [...Array(Math.max(...data.map(x => x.name)) + 1).keys()];
+  numberOfData.shift();
+  // Canvas dimensions
+  const margin = 50;
+  const width = size.width - margin - margin;
+  const height = size.height - margin - margin;
+  // Canvas settings
+  const canvas = d3.select(`#${divId}`)
+    .append('svg')
+    .attr('width', size.width)
+    .attr('height', size.height)
+    .append('g')
+    .attr('transform', `translate(${margin},${margin})`);
 
-export default { donutChart };
+  // x scale
+  const x = d3.scaleBand()
+    .domain(numberOfData)
+    .range([0, width])
+    .padding(0.1);
+
+  canvas.append('g')
+    .attr('class', 'axis axis--x')
+    .attr('transform', `translate(0,${height})`)
+    .call(d3.axisBottom(x));
+
+  // y scale
+  const y = d3.scaleLinear()
+    .domain([0, Math.max(...data.map(i => i.count[0]))])
+    .range([height, 0]);
+
+  canvas.append('g')
+    .attr('class', 'axis axis--y')
+    .call(d3.axisLeft(y));
+
+  // Bigger bar
+  canvas.selectAll('.biggerBar')
+    .data(data)
+    .enter()
+    .append('rect')
+    .attr('x', d => x(d.name))
+    .attr('y', d => y(d.count[0]))
+    .attr('fill', colors.pink)
+    .attr('width', () => x.bandwidth())
+    .attr('height', d => height - y(d.count[0]));
+
+  // Smaller bar
+  canvas.selectAll('.smallerBar')
+    .data(data)
+    .enter()
+    .append('rect')
+    .attr('x', d => x(d.name))
+    .attr('y', d => y(d.count[1]))
+    .attr('fill', colors.green)
+    .attr('width', () => x.bandwidth())
+    .attr('height', d => height - y(d.count[1]));
+}
+
+export default { donutChart, overlappingHistogram };

@@ -2,7 +2,7 @@
 import * as d3 from 'd3';
 import 'babel-polyfill';
 
-import { getReviewsForPrs } from './dataProvider';
+import { requestedChanges } from './requestedChanges';
 
 import changeH1Color from './teste';
 import numberPrsNewContributorsAccepted from './newContributorsPRs';
@@ -23,9 +23,14 @@ numberPrsNewContributorsAccepted(
   500,
   'firstPRs',
 );
-// prsWithChangeRequested(username, projectName);
-async function x() {
-  const y = await getReviewsForPrs(username, projectName);
-  console.log(y);
-}
-x();
+requestedChanges(
+  username,
+  projectName,
+  { height: 500, width: 500 },
+  'changeRequest',
+);
+// async function x() {
+//   console.log('alo');
+//   const y = await requestedChanges(username, projectName, 500, 'dale');
+//   console.log(y);
+// }

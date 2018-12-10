@@ -18,20 +18,27 @@ export async function getPrs(user, repo) {
   return prsList;
 }
 
-
 // Possible values for status:
 // 'APPROVED', 'APPROVED_AFTER_CHANGE', 'CHANGES_REQUESTED', 'PENDING'
 function prReviewState(pr) {
   let status = '';
-
   for (let i = 0; i < pr.review.length; i += 1) {
-    if (status === 'CHANGES_REQUESTED' && pr.review[i].state === 'APPROVED') status = 'APPROVED_AFTER_CHANGE';
+    if (status === 'CHANGES_REQUESTED' && (pr.review[i].state === 'APPROVED' || pr.margedAt)) status = 'APPROVED_AFTER_CHANGE';
     if (status === '' && (pr.review[i].state === 'APPROVED' || pr.review[i].state === 'CHANGES_REQUESTED')) status = pr.review[i].state;
   }
 
   if (status === '') status = 'PENDING';
 
   return status;
+}
+
+function numberOfChanges(pr) {
+  let changes = 0;
+  for (let i = 0; i < pr.review.length; i += 1) {
+    if (pr.review[i].state === 'CHANGES_REQUESTED') changes += 1;
+  }
+
+  return changes;
 }
 
 export async function getReviewsForPrs(user, repo) {
@@ -50,6 +57,11 @@ export async function getReviewsForPrs(user, repo) {
     }
 
     if (prs[i].review) prs[i].reviewStatus = prReviewState(prs[i]);
+    if (prs[i].review) {
+      prs[i].numberOfChanges = numberOfChanges(prs[i]);
+    } else {
+      prs[i].numberOfChanges = undefined;
+    }
   }
 
   return prs;
