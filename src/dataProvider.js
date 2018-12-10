@@ -58,7 +58,7 @@ export async function getReleases(user, repo) {
     releasesList = releasesList.concat(promiseValue);
     page += 1;
   }
-  console.log(releasesList);
+
   return releasesList;
 }
 
