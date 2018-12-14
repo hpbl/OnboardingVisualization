@@ -1,9 +1,9 @@
 /* eslint-disable no-await-in-loop */
 
-const token = '43aae801c5a8102a0468a7ce5398fac958611e6c';
+const token = '21ca3e689e43e2ec61a923646f8ed4b4ca7ad919';
 
 export async function isValidRepo(user, repo) {
-  const fetchResult = await fetch(`https://api.github.com/repos/${user}/${repo}`);
+  const fetchResult = await fetch(`https://api.github.com/repos/${user}/${repo}?access_token=${token}`);
 
   return fetchResult.ok;
 }
