@@ -25,7 +25,7 @@ npm install
 npm start
 ```
 
-4. Open your browser on the specified address (normally http://localhost:9966/)
+4. Open your browser on the specified address (normally http://localhost:1234/index.html)
 
 
 ## Contributing
