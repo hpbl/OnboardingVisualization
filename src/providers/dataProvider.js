@@ -3,7 +3,14 @@
 const token = '21ca3e689e43e2ec61a923646f8ed4b4ca7ad919';
 
 export async function isValidRepo(user, repo) {
-  const fetchResult = await fetch(`https://api.github.com/repos/${user}/${repo}?access_token=${token}`);
+  const options = {
+    headers: new Headers({ Authorization: `token ${token}` }),
+  };
+
+  const fetchResult = await fetch(
+    `https://api.github.com/repos/${user}/${repo}`,
+    options,
+  );
 
   return fetchResult.ok;
 }
